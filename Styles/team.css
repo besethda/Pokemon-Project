@@ -1,0 +1,72 @@
+* {
+  font-family: var(--text-font);
+}
+
+.team-box {
+  margin: 8px 0;
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  width: 100%;
+}
+
+.team-container {
+  display: flex;
+  width: clamp(675px, 55%, 900px);
+  height: 100%;
+}
+
+.team-mate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: rgba(69, 69, 69, 0.873) 2px solid;
+  border-radius: 14px;
+  box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.626);
+  width: 14%;
+  aspect-ratio: 4/5;
+  margin: 1.33%;
+}
+
+.active-mate {
+  animation: activeTeam 1.5s infinite;
+}
+
+.pokemon-pic {
+  width: 100%;
+  height: auto;
+}
+
+.plus,
+.minus {
+  stroke: rgba(96, 96, 96, 0.489);
+  stroke-width: 2px;
+  position: fixed;
+  right: 6px;
+  top: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 12%;
+}
+
+.pokemon-name {
+  font-size: 1.2rem;
+}
+
+.pokemon-list {
+  border-top: rgba(0, 0, 0, 0.304) solid 2px;
+}
+
+@keyframes activeTeam {
+  0% {
+    transform: scale(1.05);
+    box-shadow: 2px 2px 11px 2px rgb(35, 35, 35);
+  } 50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 6px 2px rgb(35, 35, 35);
+  } 100% {
+    transform: scale(1.05);
+    box-shadow: 2px 2px 11px 2px rgb(35, 35, 35);
+  }
+}
