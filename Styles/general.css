@@ -1,25 +1,114 @@
+:root {
+  --primary-background: linear-gradient(
+    16deg,
+    rgba(58, 58, 58, 0.913),
+    rgb(11, 11, 11)
+  );
+  --secondary-background: rgb(240, 240, 240);
+  --text-font: "Outfit", sans-serif;
+  --text-font-size: 1.5rem;
+  --title-font-size: 2.1rem;
+  --text-font-color: rgb(33, 33, 33);
+}
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-    height: 100vh;
+  height: 100vh;
 }
 
 body {
-    margin: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-image: url("../Images/pokemon_background.jpg");
+  background-blend-mode: darken;
+  background-color: rgba(110, 110, 110, 0.656);
+  height: 120px;
+  font-family: var(--title-font);
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer {
+  height: 46px;
+  background: var(--primary-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-text {
+  font-family: var(--text-font);
+  color: rgba(255, 255, 255, 0.405);
+  font-weight: 300;
 }
 
 .header,
 .footer {
-    height: 150px;
-    background-color: green;
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  margin-left: 3%;
+  height: 90%;
+  width: fit-content;
+}
+
+.logo {
+  height: 100%;
+}
+
+.nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 3%;
+}
+
+.nav-option {
+  height: 40%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-option:hover {
+  transform: scale(1.07);
+  cursor: pointer;
+}
+
+.nav-option:active {
+  transform: scale(0.96);
+}
+
+.nav-img {
+  width: fit-content;
+  height: 100%;
 }
 
 .main {
-    flex: 1;
-    background-color: blue;
+  flex: 1;
+  background: var(--secondary-background);
+}
+
+.h {
+  font-family: var(--text-font);
+  color: var(--text-font-color);
+  font-weight: 500;
+  font-size: var(--title-font-size);
+}
+
+.p {
+  font-family: var(--text-font);
+  color: var(--text-font-color);
+  font-weight: 500;
+  font-size: var(--text-font-size);
+  font-weight: 300;
 }
