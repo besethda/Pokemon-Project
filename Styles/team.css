@@ -16,12 +16,35 @@
   height: 100%;
 }
 
+.add-mate-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 14%;
+  aspect-ratio: 4/5;
+  margin: 1.33%;
+}
+
+.add-mate {
+  width: 45px;
+  height: 45px;
+  stroke: rgb(50, 50, 50);
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  transition: all .2s;
+  cursor: pointer;
+}
+
+.add-mate:hover {
+  transform: scale(1.1);
+}
+
 .team-mate {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  border: rgba(69, 69, 69, 0.873) 2px solid;
   border-radius: 14px;
   box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.626);
   width: 14%;
@@ -33,9 +56,15 @@
   animation: activeTeam 1.5s infinite;
 }
 
+.mate-pic,
 .pokemon-pic {
   width: 100%;
   height: auto;
+}
+
+.mate-name {
+  font-size: 1.2rem;
+  padding: 4px 1px;
 }
 
 .plus,
@@ -48,14 +77,43 @@
   width: 22px;
   height: 22px;
   border-radius: 12%;
+  cursor: pointer;
+  transition: .1s all;
 }
 
-.pokemon-name {
-  font-size: 1.2rem;
+.plus:hover,
+.minus:hover {
+  transform: scale(1.15);
+}
+
+.plus:active,
+.minus:active {
+  transform: scale(.96);
 }
 
 .pokemon-list {
   border-top: rgba(0, 0, 0, 0.304) solid 2px;
+}
+
+.pokemon-list {
+  display: flex;
+}
+
+.pokemon-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.626);
+  border-radius: 14px;
+  width: clamp(80px, 6.5%, 200px);
+  aspect-ratio: 4/5;
+  margin: 1.33%;
+}
+
+pokemon-name {
+  font-size: 1.1rem;
+  padding: 2px 1px;
 }
 
 @keyframes activeTeam {
