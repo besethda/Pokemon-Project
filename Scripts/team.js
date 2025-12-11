@@ -1,6 +1,21 @@
 const pokemonTypes = ['water', 'fire', 'grass', 'rock', 'ground', 'flying', 'normal', 'fighting', 'psychic', 'fairy', 'dark', 'ghost', 'steel', 'dragon', 'poison', 'bug', 'electric']
 let currentType = ''
 
+const printTypes = () => {
+  let typeContainer = $('.type-menu')
+  setTimeout( ()=> {
+  pokemonTypes.forEach(type => {
+    typeContainer.append(`
+      <div class='type-item' id='${type}'>${type}</div>
+      `)
+    $(`#${type}`).click(()=> {
+      currentType = type
+      $('.type-text').text(`${type}`)
+      $('.type-menu').css('display', 'none')
+    })
+})}, 200)
+}
+
 class TeamMate {
   constructor(name, type, img) {
     this.name = name
@@ -21,6 +36,19 @@ class TeamMate {
     }
 }
 
+// class Pokemon extends TeamMate {
+//   createPokemon {
+
+//   }
+// }
+
 const addNewMember = () => {
   teamMates = $()
 }
+
+$(`.type-box`).click(()=> {
+   let menu = $('.type-menu')
+$(`.type-menu`).css('display', 'flex'))
+})
+
+printTypes()
