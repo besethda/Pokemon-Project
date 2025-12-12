@@ -1,6 +1,6 @@
-const pokemonTypes = ['water', 'fire', 'grass', 'rock', 'ground', 'flying', 'normal', 'fighting', 'psychic', 'fairy', 'dark', 'ghost', 'steel', 'dragon', 'poison', 'bug', 'electric']
+const pokemonTypes = ['Water', 'Fire', 'Grass', 'Rock', 'Ground', 'Flying', 'Normal', 'Fighting', 'Psychic', 'Fairy', 'Dark', 'Ghost', 'Steel', 'Dragon', 'Poison', 'Bug', 'Electric']
 let currentType = ''
-let currentGen = 1
+let currentGen = 6
 let typeBoxOn = false
 let teamPokemon = []
 let typeUrl = "https://pokeapi.co/api/v2/type/"
@@ -8,7 +8,7 @@ let genUrl = "https://pokeapi.co/api/v2/generation/"
 let pokeUrl = "https://pokeapi.co/api/v2/pokemon/"
 
 const getPokemon = async () => {
-  const Turl = typeUrl + currentType
+  const Turl = typeUrl + currentType.toLowerCase()
   const Gurl = genUrl + currentGen
   let genData
   let typeData
@@ -19,7 +19,6 @@ const getPokemon = async () => {
       return
     }
     typeData = await response.json()
-    console.log(typeData.pokemon)
 
   } catch (error) {
     console.log('Error: ', error)
@@ -32,7 +31,6 @@ const getPokemon = async () => {
       return
     }
     genData = await response.json()
-    console.log(genData.pokemon_species)
 
   } catch (error) {
     console.log('Error: ', error)
@@ -65,7 +63,6 @@ const printPokemon = async (pokemon) => {
   } catch (error) {
     console.log('Error: ', error)
   }
-  console.log(data.sprites.front_default)
   let newPokemon = new Pokemon(data.name, currentType, data.sprites.front_default)
   newPokemon.createPokemon()
 }
@@ -78,6 +75,7 @@ const printTypes = () => {
       `)
     $(`#${type}`).click(() => {
       currentType = type
+      $('.pokemon-box').remove()
       $('.type-text').text(`${type}`)
       $('.type-menu').css('display', 'none')
       getPokemon()
