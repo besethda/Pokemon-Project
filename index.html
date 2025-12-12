@@ -10,8 +10,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./Styles/general.css" />
-    <script type="module" src="/Scripts/index.js" defer></script>
-    <script type="module" src="/Scripts/general.js" defer></script>
+    <link rel="stylesheet" href="./Styles/index.css">
+    <script src="./Scripts/index.js" defer></script>
+    <script type="module" src="./Scripts/general.js" defer></script>
     <title>Poke Team Builder</title>
   </head>
   <body>
@@ -33,6 +34,26 @@
         deserunt. Aut assumenda accusantium cum commodi possimus laboriosam ipsa
         dignissimos, dolor sed?
       </p>
+
+      <input type="text" class="pokemonName" placeholder="Enter Pokemon Name">
+      <button onclick="fetchData()">Search Pokemon</button><br>
+      <div class="pokemon">
+        <div class="pokemon-header">
+          <div class="blue-circle"></div>
+          <h2 class="pokemon-name"></h2>
+        </div>
+        <div class="pokemon-picture">
+          <img src="" alt="pokemon sprite" class="pokemonSprite" style="display: none">
+          <img src="" alt="pokemon sprite shiny" class="pokemonSpriteShiny" style="display: none">
+        </div>
+        <div class="pokemon-info-wrapper">
+          <div class="pokemon-info">
+            <p class="pokemon-height"></p>
+            <p class="pokemon-weight"></p>
+          </div>
+          <div class="plus-button"></div>
+        </div>
+      </div>
     </section>
     <footer class="footer">
       <div class="footer-text">© Oscar Seth Villiam (Team 4)</div>

@@ -1,0 +1,72 @@
+.pokemonSprite,
+.pokemonSpriteShiny {
+    height: 300px;
+    width: auto;
+}
+
+.pokemon-name {
+    font-family: var(--text-font);
+    color: var(--text-font-color);
+    font-weight: 500;
+    font-size: var(--text-font-size);
+    font-weight: 300;
+    margin: 16px;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.blue-circle {
+    background-color: rgb(8, 184, 228);
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin: 16px;
+    border: 10px solid rgb(180, 180, 180);
+}
+
+.pokemon {
+    background-color: rgb(151, 12, 12);
+    border-radius: 10px;
+    border: 5px solid black;
+}
+
+.pokemon-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pokemon-picture {
+    background-color: rgb(8, 184, 228);
+    margin: 32px;
+    border-radius: 10px;
+    border: 25px solid rgb(180, 180, 180);
+}
+
+.pokemon-info-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pokemon-info {
+    border-radius: 10px;
+    background-color: rgb(83, 146, 83);
+    display: inline-block;
+    margin: 16px;
+    padding: 32px;
+}
+
+.plus-button {
+	width: 100px;
+	height: 100px;
+	background: linear-gradient(to bottom, transparent 40%, #000 40%, #000 60%, transparent 60%), linear-gradient(to right, transparent 40%, #000 40%, #000 60%, transparent 60%);
+    margin-right: 32px;
+}
+
+
