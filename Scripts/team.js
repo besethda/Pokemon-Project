@@ -5,6 +5,7 @@ let typeBoxOn = false
 let teamPokemon = []
 let typeUrl = "https://pokeapi.co/api/v2/type/"
 let genUrl = "https://pokeapi.co/api/v2/generation/"
+let pokeUrl = "https://pokeapi.co/api/v2/pokemon/"
 
 const getPokemon = async () => {
   const Turl = typeUrl + currentType
@@ -39,12 +40,34 @@ const getPokemon = async () => {
 
   let printablePokemon = []
 
-  typeData.pokemon.forEach(testPokemon, index => {
-    if (genData.pokemon_species[index].name.includes(typeData.pokemon[index].pokemon.name))
-      printablePokemon.push(typeData.pokemon[index].pokemon.name)
-  })
+  for(let i = 0; i < genData.pokemon_species.length; i++) {
+    for (let j = 0; j < typeData.pokemon.length; j++)
+      if (genData.pokemon_species[i].name.includes(typeData.pokemon[j].pokemon.name))
+        printablePokemon.push(typeData.pokemon[j].pokemon.name)
+  }
 
-  console.log(printablePokemon)
+  printablePokemon.forEach(pokemon => {
+    printPokemon(pokemon)
+  });
+}
+
+const printPokemon = async (pokemon) => {
+  let Purl = pokeUrl + pokemon
+  let data
+  try {
+    const response = await fetch(Purl)
+    if (!response.ok) {
+      console.error('response was not ok.')
+      return
+    }
+    data = await response.json()
+
+  } catch (error) {
+    console.log('Error: ', error)
+  }
+  console.log(data.sprites.front_default)
+  let newPokemon = new Pokemon(data.name, currentType, data.sprites.front_default)
+  newPokemon.createPokemon()
 }
 
 const printTypes = () => {
@@ -78,7 +101,7 @@ class TeamMate {
   createMate() {
     $('.team-container').append(
       `<div class='team-mate active-mate' id="${this.name}">
-          <img class="mate-pic" src=${this.img}/>
+          <img class="mate-pic" src=${this.img} />
           <svg class="minus" viewBox="0 0 24 24"><path d="M19,11H5a1,1,0,0,0,0,2H19a1,1,0,0,0,0-2Z"/></svg>
           <div class="mate-name">${this.name}</div>
         </div>`)
@@ -90,11 +113,11 @@ class Pokemon extends TeamMate {
   createPokemon() {
     $('.pokemon-list').append(
       `<div class="pokemon-box" id=${this.name}-pokemon>
-        <img class="pokemon-pic" src=${this.img}/>
+        <img class="pokemon-pic" src=${this.img} />
         <svg class="add-pokemon" viewBox="0 0 24 24"><path d="M5 12h7m7 0h-7m0 0V5m0 7v7"/></svg>
         <div class="pokemon-name">${this.name}</div>
       </div>`)
-    $(`#${this.name}-pokemon`).click(() => {
+    $(`#${this.name}-pokemon .add-pokemon`).click(() => {
       const teamMember = new TeamMate(this.name, this.type, this.img)
       teamMember.createMate()
     })
