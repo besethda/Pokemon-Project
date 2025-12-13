@@ -1,7 +1,8 @@
 const pokemonTypes = ['Water', 'Fire', 'Grass', 'Rock', 'Ground', 'Flying', 'Normal', 'Fighting', 'Psychic', 'Fairy', 'Dark', 'Ghost', 'Steel', 'Dragon', 'Poison', 'Bug', 'Electric']
 let currentType = ''
-let currentGen = 6
+let currentGen
 let typeBoxOn = false
+let genBoxOn = false
 let teamPokemon = []
 let typeUrl = "https://pokeapi.co/api/v2/type/"
 let genUrl = "https://pokeapi.co/api/v2/generation/"
@@ -38,7 +39,7 @@ const getPokemon = async () => {
 
   let printablePokemon = []
 
-  for(let i = 0; i < genData.pokemon_species.length; i++) {
+  for (let i = 0; i < genData.pokemon_species.length; i++) {
     for (let j = 0; j < typeData.pokemon.length; j++)
       if (genData.pokemon_species[i].name.includes(typeData.pokemon[j].pokemon.name))
         printablePokemon.push(typeData.pokemon[j].pokemon.name)
@@ -78,13 +79,25 @@ const printTypes = () => {
       $('.pokemon-box').remove()
       $('.type-text').text(`${type}`)
       $('.type-menu').css('display', 'none')
-      getPokemon()
+      if (currentGen !== '') getPokemon()
     })
   })
 }
 
-const createPokemon = () => {
-
+const printGens = () => {
+  let genMenu = $('.gen-menu')
+  for (let i = 1; i < 10; i++) {
+    genMenu.append(`
+        <div class='gen-item' id='gen${i}'>Gen ${i}</div>
+        `)
+    $(`#gen${i}`).click(() => {
+      currentGen = i
+      $('.pokemon-box').remove()
+      $('.gen-text').text(`Gen ${i}`)
+      $('.gen-menu').css('display', 'none')
+      if (currentType !== '') getPokemon()
+    })
+  }
 }
 
 class TeamMate {
@@ -104,6 +117,8 @@ class TeamMate {
           <div class="mate-name">${this.name}</div>
         </div>`)
     $(`#${this.name} .minus`).click(() => this.removeMate())
+  } replaceMate() {
+
   }
 }
 
@@ -140,4 +155,16 @@ $('.type-box').click(() => {
   }
 })
 
+$('.gen-box').click(() => {
+  let genMenu = $('.gen-menu')
+  if (!genBoxOn) {
+    genMenu.css("display", "flex")
+    genBoxOn = true
+  } else {
+    genMenu.css("display", "none")
+    genBoxOn = false
+  }
+})
+
 printTypes()
+printGens()

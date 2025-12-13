@@ -21,7 +21,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 14%;
+  width: clamp(130px, 9vw, 400px);
   aspect-ratio: 4/5;
   margin: 1.33%;
 }
@@ -47,7 +47,7 @@
   justify-content: space-between;
   border-radius: 14px;
   box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.626);
-  width: 14%;
+  width: clamp(130px, 9vw, 400px);
   aspect-ratio: 4/5;
   margin: 1.33%;
 }
@@ -91,6 +91,8 @@
 }
 
 .type-container {
+  background: var(--primary-background);
+  box-shadow: 2px 2px 11px 2px rgb(35, 35, 35);
   border-top: solid rgba(0, 0, 0, 0.263) 2px;
   display: flex;
   justify-content: center;
@@ -105,7 +107,8 @@
   width: 180px;
   font-size: var(--text-font-size);
   color: var(--font-color);
-  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.626);
+  box-shadow: 0 1px 2px 1px rgba(59, 59, 59, 0.626);
+  background-color: rgba(224, 224, 224, 0.856);
   border-radius: 12px;
   padding: 3px 7px;
   margin: 0px 12px;
@@ -132,7 +135,8 @@
 
 .type-item,
 .gen-item {
-  padding: 2px 3px;
+  padding: 3px 6px;
+  border-radius: 6px;
 }
 
 .type-item:hover,
@@ -155,9 +159,14 @@
   justify-content: space-between;
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.626);
   border-radius: 14px;
-  width: clamp(80px, 6.5%, 200px);
+  width: clamp(110px, 7.2%, 320px);
   aspect-ratio: 4/5;
   margin: .8%;
+  transition: .2s all;
+}
+
+.pokemon-box:hover {
+  transform: scale(1.07);
 }
 
 .pokemon-name {
@@ -169,8 +178,8 @@
   position: absolute;
   right: 5px;
   top: 5px;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   stroke: rgb(50, 50, 50);
   stroke-width: 1.5px;
   stroke-linecap: round;
