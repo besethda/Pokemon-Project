@@ -1,4 +1,4 @@
-const pokemonTypes = ['Water', 'Fire', 'Grass', 'Rock', 'Ground', 'Flying', 'Normal', 'Fighting', 'Psychic', 'Fairy', 'Dark', 'Ghost', 'Steel', 'Dragon', 'Poison', 'Bug', 'Electric']
+const pokemonTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water']
 let currentType = ''
 let currentGen = ''
 let typeBoxOn = false
@@ -87,40 +87,6 @@ const printTypes = () => {
   })
 }
 
-const selectActiveMate = (name = '', pokeClass = '') => {
-  if (pokeClass !== '') {
-    $(`.team-mate`).removeClass('active-mate')
-    console.log(pokeClass)
-    $(`.${pokeClass}`).addClass('active-mate')
-    console.log('ran')
-  } else {
-    $('.team-mate').removeClass('active-mate')
-    name !== '' ? $(`#${name}`).addClass('active-mate') : null
-  }
-}
-
-const newTeamMate = () => {
-  teamMateCount++
-  selectActiveMate()
-  $('.add-mate-container').remove()
-  $('.team-container').append(
-    `<div class='team-mate active-mate box${teamMateCount}'>
-        <img class="mate-pic" />
-        <div class="mate-name"></div>
-      </div>`)
-  if (teamMateCount < 6) {
-    $('.team-container').append(`<div class="add-mate-container"><svg class="add-mate" viewBox="0 0 24 24"><path d="M5 12h7m7 0h-7m0 0V5m0 7v7"/></svg></div>`)
-    $('.add-mate').click(() => {
-      newTeamMate()
-    })
-  }
-  $(`.box${teamMateCount}`).click(() => {
-    console.log('clicked')
-    const tempNum = teamMateCount
-    selectActiveMate(undefined, ('box' + tempNum))
-  })
-}
-
 const printGens = () => {
   let genMenu = $('.gen-menu')
   for (let i = 1; i < 10; i++) {
@@ -137,35 +103,50 @@ const printGens = () => {
   }
 }
 
+const selectActiveMate = (name = '', pokeClass = '') => {
+  if (pokeClass !== '') {
+    $(`.team-mate`).removeClass('active-mate')
+    $(`.${pokeClass}`).addClass('active-mate')
+  } else {
+    $('.team-mate').removeClass('active-mate')
+    name !== '' ? $(`#${name}`).addClass('active-mate') : null
+  }
+}
+
+const newTeamMate = () => {
+  teamMateCount++
+  selectActiveMate()
+  $('.add-mate-container').remove()
+  const tempNum = teamMateCount
+  $('.team-container').append(
+    `<div class='team-mate active-mate box${teamMateCount}'>
+        <img class="mate-pic" />
+        <div class="mate-name"></div>
+      </div>`)
+  if (teamMateCount < 6) {
+    $('.team-container').append(`<div class="add-mate-container"><svg class="add-mate" viewBox="0 0 24 24"><path d="M5 12h7m7 0h-7m0 0V5m0 7v7"/></svg></div>`)
+    $('.add-mate').click(() => {
+      newTeamMate()
+    })
+  }
+  $(`.box${teamMateCount}`).click(() => {
+    selectActiveMate(undefined, ('box' + tempNum))
+  })
+}
+
 class TeamMate {
   constructor(name, type, img) {
     this.name = name
     this.type = type
     this.img = img
   }
-  removeMate() {
-    $(`#${this.name}`).remove()
-    teamMateCount--
-  }
-  createMate() {
-    $('.team-container').append(
-      `<div class='team-mate active-mate' id="${this.name}">
-          <img class="mate-pic" src=${this.img} />
-          <svg class="minus" viewBox="0 0 24 24"><path d="M19,11H5a1,1,0,0,0,0,2H19a1,1,0,0,0,0-2Z"/></svg>
-          <div class="mate-name">${this.name}</div>
-        </div>`)
-    $(`#${this.name}`).click(() => selectActiveMate(this.name))
-    $(`#${this.name} .minus`).click(() => this.removeMate())
-  }
   replaceMate() {
     $('.active-mate').empty()
     $('.active-mate').append(
       `<img class="mate-pic" src=${this.img} />
-      <svg class="minus" viewBox="0 0 24 24"><path d="M19,11H5a1,1,0,0,0,0,2H19a1,1,0,0,0,0-2Z"/></svg>
       <div class="mate-name">${this.name}</div>`
     )
     $(`#${this.name}`).click(() => selectActiveMate(this.name))
-    $(`#${this.name} .minus`).click(() => this.removeMate())
   }
 }
 
@@ -185,10 +166,6 @@ class Pokemon extends TeamMate {
     this.replaceMate()
     $(`#${this.name}-pokemon`).remove()
   }
-}
-
-const addNewMember = () => {
-  teamMates = $()
 }
 
 $('.type-box').click(() => {
