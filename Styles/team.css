@@ -41,6 +41,7 @@
 }
 
 .team-mate {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,7 +71,7 @@
 .minus {
   stroke: rgba(96, 96, 96, 0.489);
   stroke-width: 2px;
-  position: fixed;
+  position: absolute;
   right: 6px;
   top: 4px;
   width: 22px;
@@ -149,6 +150,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 8px;
 }
 
 .pokemon-box {
