@@ -3,7 +3,7 @@ async function fetchData(){
 
     try{
 
-        const pokemonName = document.querySelector(".pokemonName").value.toLowerCase();
+        const pokemonName = document.querySelector(".pokemon-input").value.toLowerCase();
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
 
         if(!response.ok){
@@ -27,6 +27,9 @@ async function fetchData(){
         document.querySelector(".pokemon-name").textContent = data.name;
         document.querySelector(".pokemon-height").textContent = `Height: ${data.height}`;
         document.querySelector(".pokemon-weight").textContent = `Weight: ${data.weight}`;
+
+        document.querySelector(".pokemon").style.visibility = "visible";
+        document.querySelector(".intro-wrapper").style.display = "none";
     }
     catch(error){
         console.error(error);

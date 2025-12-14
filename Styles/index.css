@@ -4,13 +4,18 @@
     width: auto;
 }
 
+.pokemon-input {
+    margin: 32px;
+}
+
 .pokemon-name {
     font-family: var(--text-font);
     color: var(--text-font-color);
     font-weight: 500;
-    font-size: var(--text-font-size);
+    font-size: 4rem;
     font-weight: 300;
-    margin: 16px;
+    margin-right: 32px;
+    text-decoration: underline;
 }
 
 .main {
@@ -33,6 +38,7 @@
     background-color: rgb(151, 12, 12);
     border-radius: 10px;
     border: 5px solid black;
+    visibility: hidden;
 }
 
 .pokemon-header {
@@ -60,6 +66,15 @@
     display: inline-block;
     margin: 16px;
     padding: 32px;
+    border: 5px solid black;
+}
+
+.read-more {
+    background-color: rgb(8, 184, 228);
+    border-radius: 10px;
+    border: 5px solid rgb(180, 180, 180);
+    padding: 16px;
+    cursor: pointer;
 }
 
 .plus-button {
