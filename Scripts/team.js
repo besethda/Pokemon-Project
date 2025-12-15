@@ -1,77 +1,12 @@
-const pokemonTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water']
 let currentType = ''
 let currentGen = ''
 let typeBoxOn = false
 let genBoxOn = false
-let teamPokemon = []
-let typeUrl = "https://pokeapi.co/api/v2/type/"
-let genUrl = "https://pokeapi.co/api/v2/generation/"
-let pokeUrl = "https://pokeapi.co/api/v2/pokemon/"
 let teamMateCount = 0
 
-const getPokemon = async () => {
-  const Turl = typeUrl + currentType.toLowerCase()
-  const Gurl = genUrl + currentGen
-  let genData
-  let typeData
-  try {
-    const response = await fetch(Turl)
-    if (!response.ok) {
-      console.error('response was not ok.')
-      return
-    }
-    typeData = await response.json()
-
-  } catch (error) {
-    console.log('Error: ', error)
-  }
-
-  try {
-    const response = await fetch(Gurl)
-    if (!response.ok) {
-      console.error('response was not ok.')
-      return
-    }
-    genData = await response.json()
-
-  } catch (error) {
-    console.log('Error: ', error)
-  }
-
-  let printablePokemon = []
-
-  for (let i = 0; i < genData.pokemon_species.length; i++) {
-    for (let j = 0; j < typeData.pokemon.length; j++)
-      if (genData.pokemon_species[i].name.includes(typeData.pokemon[j].pokemon.name))
-        printablePokemon.push(typeData.pokemon[j].pokemon.name)
-  }
-
-  printablePokemon.forEach(pokemon => {
-    printPokemon(pokemon)
-  });
-}
-
-const printPokemon = async (pokemon) => {
-  let Purl = pokeUrl + pokemon
-  let data
-  try {
-    const response = await fetch(Purl)
-    if (!response.ok) {
-      console.error('response was not ok.')
-      return
-    }
-    data = await response.json()
-
-  } catch (error) {
-    console.log('Error: ', error)
-  }
-
-  let upperName = data.name.charAt(0).toUpperCase() + data.name.slice(1)
-  let newPokemon = new Pokemon(upperName, currentType, data.sprites.front_default)
-  newPokemon.createPokemon()
-}
-
+//Creates Type Menu and Gen Menu//
 const printTypes = () => {
+  const pokemonTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water']
   let typeContainer = $('.type-menu')
   pokemonTypes.forEach(type => {
     typeContainer.append(`
@@ -103,16 +38,53 @@ const printGens = () => {
   }
 }
 
-const selectActiveMate = (name = '', pokeClass = '') => {
-  if (pokeClass !== '') {
-    $(`.team-mate`).removeClass('active-mate')
-    $(`.${pokeClass}`).addClass('active-mate')
-  } else {
-    $('.team-mate').removeClass('active-mate')
-    name !== '' ? $(`#${name}`).addClass('active-mate') : null
+//API Request Functions//
+const makeRequest = async (url) => {
+  let data
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      console.error('response was not ok.')
+      return
+    }
+    data = await response.json()
+
+  } catch (error) {
+    console.log('Error: ', error)
   }
+  return data
 }
 
+const getPokemon = async () => {
+  const typeUrl = "https://pokeapi.co/api/v2/type/"
+  const genUrl = "https://pokeapi.co/api/v2/generation/"
+  const Turl = typeUrl + currentType.toLowerCase()
+  const Gurl = genUrl + currentGen
+  let genData = await makeRequest(Gurl)
+  let typeData = await makeRequest(Turl)
+  let printablePokemon = []
+
+  for (let i = 0; i < genData.pokemon_species.length; i++) {
+    for (let j = 0; j < typeData.pokemon.length; j++)
+      if (genData.pokemon_species[i].name.includes(typeData.pokemon[j].pokemon.name))
+        printablePokemon.push(typeData.pokemon[j].pokemon.name)
+  }
+
+  printablePokemon.forEach(pokemon => {
+    printPokemon(pokemon)
+  });
+}
+
+const printPokemon = async pokemon => {
+  const pokeUrl = "https://pokeapi.co/api/v2/pokemon/"
+  let Purl = pokeUrl + pokemon
+  let data = await makeRequest(Purl)
+  let upperName = data.name.charAt(0).toUpperCase() + data.name.slice(1)
+  let newPokemon = new Pokemon(upperName, currentType, data.sprites.front_default)
+  newPokemon.createPokemon()
+}
+
+//Adding Pokemon to team Logic//
 const newTeamMate = () => {
   teamMateCount++
   selectActiveMate()
@@ -134,6 +106,17 @@ const newTeamMate = () => {
   })
 }
 
+const selectActiveMate = (name = '', pokeClass = '') => {
+  if (pokeClass !== '') {
+    $(`.team-mate`).removeClass('active-mate')
+    $(`.${pokeClass}`).addClass('active-mate')
+  } else {
+    $('.team-mate').removeClass('active-mate')
+    name !== '' ? $(`#${name}`).addClass('active-mate') : null
+  }
+}
+
+//Classes//
 class TeamMate {
   constructor(name, type, img) {
     this.name = name
@@ -168,6 +151,7 @@ class Pokemon extends TeamMate {
   }
 }
 
+//Event Listeners//
 $('.type-box').click(() => {
   let typeMenu = $('.type-menu')
   if (!typeBoxOn) {
@@ -190,6 +174,7 @@ $('.gen-box').click(() => {
   }
 })
 
+//Initiate//
 printTypes()
 printGens()
 newTeamMate()
