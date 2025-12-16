@@ -78,3 +78,15 @@ async function loadPokemon() {
   }
 }
 loadPokemon();
+
+const id = Number(pokemonId)
+
+document.querySelector(".arrow-prev").onclick = () => {
+  if (id > 1) {
+    window.location.href = `description.html?id=${id - 1}`
+  }
+}
+
+document.querySelector(".arrow-next").onclick = () => {
+    window.location.href = `description.html?id=${id + 1}`
+  }
