@@ -12,10 +12,34 @@ async function loadPokemon() {
     }
     const data = await response.json();
 
-    document.querySelector(".h").textContent = data.name;
+    async function loadSpecies() {
+      try {
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`
+        );
+        if (!response.ok) {
+          throw new Error("Species data not found!");
+        }
+        const data = await response.json();
+
+        const entry = data.flavor_text_entries.find(
+          (item) => item.language.name === "en"
+        );
+
+        document.querySelector(".p").textContent = entry.flavor_text;
+      } catch (error) {
+        document.querySelector(".p").textContent =
+          "Could not load Pokemon description";
+      }
+    }
+
+    document.querySelector(".h").textContent =
+      data.name[0].toUpperCase() + data.name.slice(1);
     document.querySelector(".p").textContent = "Loading description...";
     document.querySelector(".pokemon-img").src =
       data.sprites.other["official-artwork"].front_default;
+
+    loadSpecies();
 
     const heightMeter = data.height / 10;
     const weightKg = data.weight / 10;
@@ -54,26 +78,3 @@ async function loadPokemon() {
   }
 }
 loadPokemon();
-
-async function loadSpecies() {
-  try {
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`
-    );
-    if (!response.ok) {
-      throw new Error("Species data not found!");
-    }
-    const data = await response.json();
-
-    const entry = data.flavor_text_entries.find(
-      (item) => item.language.name === "en"
-    );
-    document.querySelector(".p").textContent = entry.flavor_text;
-  } catch (error) {
-    console.log(error);
-    document.querySelector(".p").textContent =
-      "Could not load Pokemon description";
-  }
-}
-
-loadSpecies();
