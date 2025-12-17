@@ -1,6 +1,9 @@
-const urlParams = new URLSearchParams(window.location.search);
-let pokemonId = urlParams.get("id");
+let pokemonId = Number(localStorage.getItem("selectedPokemonId"));
 const MAX_POKEMON = 1025;
+
+const savePokemonId = (id) => {
+  localStorage.setItem("selectedPokemonId", id);
+};
 
 async function loadSpecies() {
   try {
@@ -85,7 +88,6 @@ async function loadPokemon() {
     facts.appendChild(typesEl);
     facts.appendChild(abilitiesEl);
 
-    return data;
   } catch (error) {
     document.querySelector(".h").textContent = "Error";
     document.querySelector(".p").textContent = "Could not load Pokemon";
@@ -94,23 +96,29 @@ async function loadPokemon() {
 document.querySelector(".loadPokemon").addEventListener("click", () => {
   const randomPokemonId = Math.floor(Math.random() * MAX_POKEMON) + 1;
   pokemonId = randomPokemonId;
+  savePokemonId(pokemonId);
   loadPokemon();
 });
 
 if (pokemonId) {
-  loadPokemon()
+  loadPokemon();
 } else {
-  document.querySelector(".p").textContent = "Click the button generate a random Pokémon!"
+  document.querySelector(".p").textContent =
+    "Click the button generate a random Pokémon!";
 }
 
 document.querySelector(".arrow-prev").onclick = () => {
   const currentId = Number(pokemonId);
   if (currentId > 1) {
-    window.location.href = `description.html?id=${currentId - 1}`;
+    pokemonId = currentId - 1;
+    savePokemonId(pokemonId);
+    loadPokemon();
   }
 };
 
 document.querySelector(".arrow-next").onclick = () => {
   const currentId = Number(pokemonId);
-  window.location.href = `description.html?id=${currentId + 1}`;
+  pokemonId = currentId + 1;
+  savePokemonId(pokemonId);
+  loadPokemon();
 };

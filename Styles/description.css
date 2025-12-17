@@ -82,16 +82,21 @@
   font-size: 1rem;
   padding: 0.6rem 1.2rem;
   margin-bottom: 1.5rem;
-
   background-color: #e0e0e0;
   color: #222;
-
   border: 1px solid #bbb;
   border-radius: 6px;
   cursor: pointer;
 }
 
-
+.arrow-prev,
+.arrow-next {
+  font-size: 2rem;
+  padding: 0.5rem;
+  background: none;
+  cursor: pointer;
+  border: 6px solid rgba(214, 40, 40, 0.9);
+}
 
 @media (min-width: 340px) and (max-width: 1024px) {
   .main {
@@ -117,5 +122,11 @@
 
   .facts {
     font-size: 1rem;
+  }
+
+  .arrow-prev,
+  .arrow-next {
+    font-size: 1rem;
+    cursor: pointer;
   }
 }
