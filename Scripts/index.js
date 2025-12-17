@@ -25,8 +25,9 @@ async function fetchData(){
         imgElementShiny.style.display = "inline-block";
 
         document.querySelector(".pokemon-name").textContent = data.name;
-        document.querySelector(".pokemon-height").textContent = `Height: ${data.height}`;
-        document.querySelector(".pokemon-weight").textContent = `Weight: ${data.weight}`;
+
+        firstCry = new Audio(data.cries.latest);
+        secondCry = new Audio(data.cries.legacy);
 
         document.querySelector(".pokemon").style.visibility = "visible";
         document.querySelector(".intro-wrapper").style.display = "none";
@@ -35,3 +36,19 @@ async function fetchData(){
         console.error(error);
     }
 }
+
+document.querySelector(".first-cry").addEventListener("click", () => {
+    if (firstCry) {
+        firstCry.currentTime = 0;
+        firstCry.volume = 0.2;
+        firstCry.play();
+    }
+});
+
+document.querySelector(".second-cry").addEventListener("click", () => {
+    if (secondCry) {
+        secondCry.currentTime = 0;
+        secondCry.volume = 0.2;
+        secondCry.play();
+    }
+});
