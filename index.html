@@ -10,8 +10,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./Styles/general.css" />
-    <script type="module" src="/Scripts/index.js" defer></script>
-    <script type="module" src="/Scripts/general.js" defer></script>
+    <link rel="stylesheet" href="./Styles/index.css">
+    <script src="./Scripts/index.js" defer></script>
+    <script type="module" src="./Scripts/general.js" defer></script>
     <title>Poke Team Builder</title>
   </head>
   <body>
@@ -26,13 +27,33 @@
       </nav>
     </header>
     <section class="main">
-      <h1 class="h">Header Example</h1>
-      <p class="p">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam vitae,
-        consequatur in deleniti reprehenderit placeat perspiciatis est quaerat
-        deserunt. Aut assumenda accusantium cum commodi possimus laboriosam ipsa
-        dignissimos, dolor sed?
-      </p>
+      <div class="intro-wrapper">
+        <h1 class="h">Welcome to the pokemon team builder!</h1>
+        <p class="p">
+          On this site you will be able to search and read about pokemon and then place them in a teambuilder to make the perfect team to take on any trainer!
+        </p>
+      </div>
+
+      <input type="text" class="pokemon-input" placeholder="Enter Pokemon Name">
+      <button onclick="fetchData()">Search Pokemon</button><br>
+      <div class="pokemon">
+        <div class="pokemon-header">
+          <div class="blue-circle"></div>
+          <h2 class="pokemon-name"></h2>
+        </div>
+        <div class="pokemon-picture">
+          <img src="" alt="pokemon sprite" class="pokemonSprite" style="display: none">
+          <img src="" alt="pokemon sprite shiny" class="pokemonSpriteShiny" style="display: none">
+        </div>
+        <div class="pokemon-info-wrapper">
+          <div class="pokemon-info">
+            <button class="first-cry">New Cry</button>
+            <button class="second-cry">Legacy Cry</button>
+          </div>
+          <div class="read-more"><a href="description.html">Read more?</a></div>
+          <div class="plus-button"></div>
+        </div>
+      </div>
     </section>
     <footer class="footer">
       <div class="footer-text">© Oscar Seth Villiam (Team 4)</div>

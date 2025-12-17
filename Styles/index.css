@@ -1,0 +1,137 @@
+.h {
+    margin: 12px;
+    font-size: 4rem;
+    text-align: center;
+}
+
+.p {
+    margin: 12px;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.pokemonSprite,
+.pokemonSpriteShiny {
+    height: auto;
+    width: 25%;
+    min-width: 150px;
+}
+
+.pokemon-input {
+    margin: 32px;
+    font-size: 3rem;
+}
+
+.pokemon-name {
+    font-family: var(--text-font);
+    color: var(--text-font-color);
+    font-weight: 500;
+    font-size: 4rem;
+    font-weight: 300;
+    margin: 16px;
+    text-decoration: underline;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.blue-circle {
+    background-color: rgb(8, 184, 228);
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin: 16px;
+    border: 10px solid rgb(180, 180, 180);
+}
+
+.pokemon {
+    background-color: rgb(151, 12, 12);
+    border-radius: 10px;
+    border: 5px solid black;
+    visibility: hidden;
+    margin: 16px;
+    width: 80%;
+    max-width: 1200px;
+}
+
+.pokemon-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pokemon-picture {
+    background-color: rgb(8, 184, 228);
+    margin: 32px;
+    border-radius: 10px;
+    border: 25px solid rgb(180, 180, 180);
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pokemon-info-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pokemon-info {
+    border-radius: 10px;
+    background-color: rgb(83, 146, 83);
+    display: inline-block;
+    margin: 16px;
+    padding: 16px;
+    border: 5px solid black;
+
+    button {
+        background-color: rgb(8, 184, 228);
+        border-radius: 10px;
+        border: 5px solid rgb(180, 180, 180);
+    }
+}
+
+.read-more {
+    background-color: rgb(8, 184, 228);
+    border-radius: 10px;
+    border: 5px solid rgb(180, 180, 180);
+    padding: 16px;
+    margin: 16px;
+    cursor: pointer;
+}
+
+.plus-button {
+	width: 100px;
+	height: 100px;
+	background: linear-gradient(to bottom, transparent 40%, #000 40%, #000 60%, transparent 60%), linear-gradient(to right, transparent 40%, #000 40%, #000 60%, transparent 60%);
+    margin: 32px;
+}
+
+
+@media (max-width : 1024px) {
+    .blue-circle {
+        display: none;
+    }
+
+    .plus-button {
+        display: none;
+    }
+
+    .pokemon-input {
+        margin: 32px;
+        font-size: 1rem;
+    }
+
+    .h {
+        font-size: 2rem;
+    }
+
+    .p {
+        font-size: 1rem;
+    }
+}
+
