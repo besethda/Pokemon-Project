@@ -1,5 +1,27 @@
-const params = new URLSearchParams(window.location.search);
-const pokemonId = params.get("id");
+const urlParams = new URLSearchParams(window.location.search);
+let pokemonId = urlParams.get("id");
+const MAX_POKEMON = 1025;
+
+async function loadSpecies() {
+  try {
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`
+    );
+    if (!response.ok) {
+      throw new Error("Species data not found!");
+    }
+    const data = await response.json();
+
+    const entry = data.flavor_text_entries.find(
+      (item) => item.language.name === "en"
+    );
+
+    document.querySelector(".p").textContent = entry.flavor_text;
+  } catch (error) {
+    document.querySelector(".p").textContent =
+      "Could not load Pokemon description";
+  }
+}
 
 async function loadPokemon() {
   try {
@@ -11,27 +33,6 @@ async function loadPokemon() {
       throw new Error("Pokemon not found!");
     }
     const data = await response.json();
-
-    async function loadSpecies() {
-      try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`
-        );
-        if (!response.ok) {
-          throw new Error("Species data not found!");
-        }
-        const data = await response.json();
-
-        const entry = data.flavor_text_entries.find(
-          (item) => item.language.name === "en"
-        );
-
-        document.querySelector(".p").textContent = entry.flavor_text;
-      } catch (error) {
-        document.querySelector(".p").textContent =
-          "Could not load Pokemon description";
-      }
-    }
 
     document.querySelector(".h").textContent =
       data.name[0].toUpperCase() + data.name.slice(1);
@@ -61,15 +62,28 @@ async function loadPokemon() {
 
     const typesEl = document.createElement("div");
     typesEl.className = "fact";
-    typesEl.textContent =
-      "Type : " + data.types.map((t) => t.type.name).join(", ");
+    const typeNames = [];
+
+    data.types.forEach((typeObj) => {
+      typeNames.push(typeObj.type.name);
+    });
+    typesEl.textContent = "Type : " + typeNames.join(", ");
 
     const abilitiesEl = document.createElement("div");
     abilitiesEl.className = "fact";
-    abilitiesEl.textContent =
-      "Abilities: " + data.abilities.map((a) => a.ability.name).join(", ");
 
-    facts.append(id, heightEl, weightEl, typesEl, abilitiesEl);
+    const abilityNames = [];
+
+    data.abilities.forEach((abilityObj) => {
+      abilityNames.push(abilityObj.ability.name);
+    });
+    abilitiesEl.textContent = "Abilities : " + abilityNames.join(", ");
+
+    facts.appendChild(id);
+    facts.appendChild(heightEl);
+    facts.appendChild(weightEl);
+    facts.appendChild(typesEl);
+    facts.appendChild(abilitiesEl);
 
     return data;
   } catch (error) {
@@ -77,16 +91,26 @@ async function loadPokemon() {
     document.querySelector(".p").textContent = "Could not load Pokemon";
   }
 }
-loadPokemon();
+document.querySelector(".loadPokemon").addEventListener("click", () => {
+  const randomPokemonId = Math.floor(Math.random() * MAX_POKEMON) + 1;
+  pokemonId = randomPokemonId;
+  loadPokemon();
+});
 
-const id = Number(pokemonId)
-
-document.querySelector(".arrow-prev").onclick = () => {
-  if (id > 1) {
-    window.location.href = `description.html?id=${id - 1}`
-  }
+if (pokemonId) {
+  loadPokemon()
+} else {
+  document.querySelector(".p").textContent = "Click the button generate a random Pokémon!"
 }
 
-document.querySelector(".arrow-next").onclick = () => {
-    window.location.href = `description.html?id=${id + 1}`
+document.querySelector(".arrow-prev").onclick = () => {
+  const currentId = Number(pokemonId);
+  if (currentId > 1) {
+    window.location.href = `description.html?id=${currentId - 1}`;
   }
+};
+
+document.querySelector(".arrow-next").onclick = () => {
+  const currentId = Number(pokemonId);
+  window.location.href = `description.html?id=${currentId + 1}`;
+};

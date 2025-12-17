@@ -77,6 +77,20 @@
   justify-content: center;
 }
 
+.loadPokemon {
+  font-family: var(--text-font);
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  margin-bottom: 1.5rem;
+
+  background-color: #e0e0e0;
+  color: #222;
+
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 
 
 @media (min-width: 340px) and (max-width: 1024px) {
