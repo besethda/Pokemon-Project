@@ -1,3 +1,4 @@
+let selectedPokemonId
 
 async function fetchData(){
 
@@ -24,6 +25,8 @@ async function fetchData(){
         imgElementShiny.src = pokemonSpriteShiny;
         imgElementShiny.style.display = "inline-block";
 
+        selectedPokemonId = data.id
+
         document.querySelector(".pokemon-name").textContent = data.name;
 
         firstCry = new Audio(data.cries.latest);
@@ -31,6 +34,8 @@ async function fetchData(){
 
         document.querySelector(".pokemon").style.visibility = "visible";
         document.querySelector(".intro-wrapper").style.display = "none";
+
+        console.log(selectedPokemonId)
     }
     catch(error){
         console.error(error);
@@ -38,17 +43,27 @@ async function fetchData(){
 }
 
 document.querySelector(".first-cry").addEventListener("click", () => {
+
     if (firstCry) {
         firstCry.currentTime = 0;
         firstCry.volume = 0.2;
         firstCry.play();
     }
+
 });
 
 document.querySelector(".second-cry").addEventListener("click", () => {
+
     if (secondCry) {
         secondCry.currentTime = 0;
         secondCry.volume = 0.2;
         secondCry.play();
     }
+
 });
+
+document.querySelector(".read-more").addEventListener("click", () => {
+
+    localStorage.setItem("pokemonId", selectedPokemonId)
+
+})
