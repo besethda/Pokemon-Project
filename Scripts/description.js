@@ -1,8 +1,8 @@
-let pokemonId = Number(localStorage.getItem("selectedPokemonId"));
+let pokemonId = Number(localStorage.getItem("pokemonId"));
 const MAX_POKEMON = 1025;
 
 const savePokemonId = (id) => {
-  localStorage.setItem("selectedPokemonId", id);
+  localStorage.setItem("PokemonId", id);
 };
 
 async function loadSpecies() {
@@ -38,10 +38,10 @@ async function loadPokemon() {
     const data = await response.json();
 
     document.querySelector(".h").textContent =
-      data.name[0].toUpperCase() + data.name.slice(1);
+    data.name[0].toUpperCase() + data.name.slice(1);
     document.querySelector(".p").textContent = "Loading description...";
     document.querySelector(".pokemon-img").src =
-      data.sprites.other["official-artwork"].front_default;
+    data.sprites.other["official-artwork"].front_default;
 
     loadSpecies();
 
@@ -87,7 +87,6 @@ async function loadPokemon() {
     facts.appendChild(weightEl);
     facts.appendChild(typesEl);
     facts.appendChild(abilitiesEl);
-
   } catch (error) {
     document.querySelector(".h").textContent = "Error";
     document.querySelector(".p").textContent = "Could not load Pokemon";
