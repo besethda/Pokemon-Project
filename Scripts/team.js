@@ -80,7 +80,7 @@ const printPokemon = async pokemon => {
   let Purl = pokeUrl + pokemon
   let data = await makeRequest(Purl)
   let upperName = data.name.charAt(0).toUpperCase() + data.name.slice(1)
-  let newPokemon = new Pokemon(upperName, currentType, data.sprites.front_default)
+  let newPokemon = new Pokemon(upperName, currentType, data.sprites.front_default, data.id)
   newPokemon.createPokemon()
 }
 
@@ -94,7 +94,7 @@ const newTeamMate = () => {
     `<div class='team-mate active-mate box${teamMateCount}'>
         <img class="mate-pic" />
         <div class="mate-name"></div>
-      </div>`)
+    </div>`)
   if (teamMateCount < 6) {
     $('.team-container').append(`<div class="add-mate-container"><svg class="add-mate" viewBox="0 0 24 24"><path d="M5 12h7m7 0h-7m0 0V5m0 7v7"/></svg></div>`)
     $('.add-mate').click(() => {
@@ -116,18 +116,25 @@ const selectActiveMate = (name = '', pokeClass = '') => {
   }
 }
 
+const saveTeam = () => {
+  $('.team-mate').each((mate)=> {
+    console.log(mate)
+  })
+}
+
 //Classes//
 class TeamMate {
-  constructor(name, type, img) {
+  constructor(name, type, img, id) {
     this.name = name
     this.type = type
     this.img = img
+    this.id = id
   }
   replaceMate() {
     $('.active-mate').empty()
     $('.active-mate').append(
       `<img class="mate-pic" src=${this.img} />
-      <div class="mate-name">${this.name}</div>`
+          <div class="mate-name">${this.name}</div>`
     )
     $(`#${this.name}`).click(() => selectActiveMate(this.name))
   }
@@ -136,10 +143,10 @@ class TeamMate {
 class Pokemon extends TeamMate {
   createPokemon() {
     $('.pokemon-list').append(
-      `<div class="pokemon-box" id=${this.name}-pokemon>
-        <img class="pokemon-pic" src=${this.img} />
-        <svg class="add-pokemon" viewBox="0 0 24 24"><path d="M5 12h7m7 0h-7m0 0V5m0 7v7"/></svg>
-        <div class="pokemon-name">${this.name}</div>
+      `<div class="pokemon-box" id="${this.name}-pokemon" >
+          <img class="pokemon-pic" src=${this.img} />
+          <svg class="add-pokemon" viewBox="0 0 24 24"><path d="M5 12h7m7 0h-7m0 0V5m0 7v7"/></svg>
+          <div class="pokemon-name">${this.name}</div>
       </div>`)
     $(`#${this.name}-pokemon .add-pokemon`).click(() => {
       const teamMember = new TeamMate(this.name, this.type, this.img)
