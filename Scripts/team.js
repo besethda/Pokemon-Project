@@ -3,6 +3,7 @@ let currentGen = ''
 let typeBoxOn = false
 let genBoxOn = false
 let teamMateCount = 0
+let savedTeamNumber = 0
 
 //Creates Type Menu and Gen Menu//
 const printTypes = () => {
@@ -38,13 +39,33 @@ const printGens = () => {
   }
 }
 
-const saveContent = () => {
+const saveContent = (variableName) => {
+  let savedPokemon = []
   let teamMates = document.querySelectorAll('.team-mate')
   let teamArray = Array.from(teamMates)
-  console.log(teamArray)
-  teamArray.forEach(element => {
-    
+  teamArray.forEach((element, index) => {
+    const objName = `pokemon${index}`
+    const pokName = element.querySelector('div').textContent
+    const pokPic = element.querySelector('img').src
+    const arrayItem = [objName , [pokName, pokPic]]
+    savedPokemon.push(arrayItem)
   });
+  localStorage.setItem('savedPokemon', JSON.stringify(savedPokemon))
+}
+
+const saveSearch = () => {
+  let type = document.querySelector('.type-text')
+  let gen = document.querySelector('.gen-text')
+  localStorage.setItem('type', JSON.stringify(type))
+  localStorage.setItem('gen', JSON.stringify(gen))
+}
+
+const savePokeTeam = () => {
+  let teamMates = document.querySelectorAll('.team-mate')
+  if (teamMates.length === 6) {
+    saveContent(`Team${savedTeamNumber}`)
+    savedTeamNumber ++
+  } else console.log('Length must be 6 to save a team')
 }
 
 //API Request Functions//
@@ -143,12 +164,12 @@ class TeamMate {
     $('.active-mate').empty()
     $('.active-mate').append(
       `<img class="mate-pic" id='${this.name}-mpic' src=${this.img} />
-        <div class="mate-name" id='${this.name}-mname' >${this.name}</div>`
+        <div class="mate-name" id='${this.name}-mname' title='${this.id}' >${this.name}</div>`
     )
     $(`#${this.name}`).click(() => selectActiveMate(this.name))
-    $(document).on('click', `#${this.name}-mpic, #${this.name}-mname`, ()=> {
+    $(document).on('click', `#${this.name}-mname`, ()=> {
       localStorage.setItem('pokemonId', this.id)
-      saveContent()
+      saveContent('savedPokemon')
       window.location.href = 'description.html'
     })
   }
@@ -160,7 +181,7 @@ class Pokemon extends TeamMate {
       `<div class="pokemon-box" id="${this.name}-pokemon" >
           <img class="pokemon-pic" id="${this.name}-pic" src=${this.img} />
           <svg class="add-pokemon" viewBox="0 0 24 24"><path d="M5 12h7m7 0h-7m0 0V5m0 7v7"/></svg>
-          <div class="pokemon-name" id="${this.name}-name" >${this.name}</div>
+          <div class="pokemon-name" id="${this.name}-name" title='${this.id}' >${this.name}</div>
       </div>`)
     $(`#${this.name}-pokemon .add-pokemon`).click(() => {
       const teamMember = new TeamMate(this.name, this.type, this.img)
