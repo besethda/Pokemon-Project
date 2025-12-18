@@ -12,7 +12,6 @@ async function fetchData(){
         }
 
         const data = await response.json();
-        console.log(data)
         const pokemonSprite = data.sprites.front_default;
         const imgElement = document.querySelector(".pokemonSprite");
 
@@ -35,7 +34,7 @@ async function fetchData(){
         document.querySelector(".pokemon").style.visibility = "visible";
         document.querySelector(".intro-wrapper").style.display = "none";
 
-        console.log(selectedPokemonId)
+        document.querySelector(".pokemon-input").value = ""
     }
     catch(error){
         console.error(error);
