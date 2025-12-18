@@ -38,6 +38,15 @@ const printGens = () => {
   }
 }
 
+const saveContent = () => {
+  let teamMates = document.querySelectorAll('.team-mate')
+  let teamArray = Array.from(teamMates)
+  console.log(teamArray)
+  teamArray.forEach(element => {
+    
+  });
+}
+
 //API Request Functions//
 const makeRequest = async (url) => {
   let data
@@ -133,10 +142,15 @@ class TeamMate {
   replaceMate() {
     $('.active-mate').empty()
     $('.active-mate').append(
-      `<img class="mate-pic" src=${this.img} />
-          <div class="mate-name">${this.name}</div>`
+      `<img class="mate-pic" id='${this.name}-mpic' src=${this.img} />
+        <div class="mate-name" id='${this.name}-mname' >${this.name}</div>`
     )
     $(`#${this.name}`).click(() => selectActiveMate(this.name))
+    $(document).on('click', `#${this.name}-mpic, #${this.name}-mname`, ()=> {
+      localStorage.setItem('pokemonId', this.id)
+      saveContent()
+      window.location.href = 'description.html'
+    })
   }
 }
 
@@ -144,13 +158,18 @@ class Pokemon extends TeamMate {
   createPokemon() {
     $('.pokemon-list').append(
       `<div class="pokemon-box" id="${this.name}-pokemon" >
-          <img class="pokemon-pic" src=${this.img} />
+          <img class="pokemon-pic" id="${this.name}-pic" src=${this.img} />
           <svg class="add-pokemon" viewBox="0 0 24 24"><path d="M5 12h7m7 0h-7m0 0V5m0 7v7"/></svg>
-          <div class="pokemon-name">${this.name}</div>
+          <div class="pokemon-name" id="${this.name}-name" >${this.name}</div>
       </div>`)
     $(`#${this.name}-pokemon .add-pokemon`).click(() => {
       const teamMember = new TeamMate(this.name, this.type, this.img)
       teamMember.replaceMate()
+    })
+    $(document).on('click', `#${this.name}-pic, #${this.name}-name`, ()=> {
+      localStorage.setItem('pokemonId', this.id)
+      saveContent()
+      window.location.href = 'description.html'
     })
   } addToTeam() {
     this.replaceMate()
@@ -180,6 +199,8 @@ $('.gen-box').click(() => {
     genBoxOn = false
   }
 })
+
+$()
 
 //Initiate//
 printTypes()
