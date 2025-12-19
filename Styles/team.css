@@ -24,7 +24,7 @@
   flex-direction: column;
   justify-content: center;
   margin: 3px;
-  width: clamp(130px, 9vw, 400px);
+  height: 20vh;
 }
 
 .add-mate {
@@ -70,11 +70,7 @@
 .mate-name {
   font-size: 1.2rem;
   padding: 4px 1px;
-}
-
-.mate-id {
-  font-size: .8rem;
-  color: rgba(0, 0, 0, 0.267);
+  text-decoration: underline;
 }
 
 .add-pokemon:hover {

@@ -3,7 +3,6 @@ let currentGen = ''
 let typeBoxOn = false
 let genBoxOn = false
 let teamMateCount = 0
-let savedTeamNumber = 0
 
 //Creates Type Menu and Gen Menu//
 const printTypes = () => {
@@ -115,12 +114,6 @@ const selectActiveMate = (name = '', pokeClass = '') => {
   }
 }
 
-const saveTeam = () => {
-  $('.team-mate').each((mate) => {
-    console.log(mate)
-  })
-}
-
 //Classes//
 class TeamMate {
   constructor(name, type, img, id) {
@@ -185,8 +178,6 @@ $('.gen-box').click(() => {
     genBoxOn = false
   }
 })
-
-$()
 
 //Initiate//
 printTypes()
