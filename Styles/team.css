@@ -41,6 +41,10 @@
   transform: scale(1.2);
 }
 
+.add-mate:active {
+  transform: scale(.95);
+}
+
 .team-mate {
   align-items: center;
   aspect-ratio: 4/5;
