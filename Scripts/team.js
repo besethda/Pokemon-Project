@@ -39,35 +39,6 @@ const printGens = () => {
   }
 }
 
-const saveContent = (variableName) => {
-  let savedPokemon = []
-  let teamMates = document.querySelectorAll('.team-mate')
-  let teamArray = Array.from(teamMates)
-  teamArray.forEach((element, index) => {
-    const objName = `pokemon${index}`
-    const pokName = element.querySelector('div').textContent
-    const pokPic = element.querySelector('img').src
-    const arrayItem = [objName , [pokName, pokPic]]
-    savedPokemon.push(arrayItem)
-  });
-  localStorage.setItem('savedPokemon', JSON.stringify(savedPokemon))
-}
-
-const saveSearch = () => {
-  let type = document.querySelector('.type-text')
-  let gen = document.querySelector('.gen-text')
-  localStorage.setItem('type', JSON.stringify(type))
-  localStorage.setItem('gen', JSON.stringify(gen))
-}
-
-const savePokeTeam = () => {
-  let teamMates = document.querySelectorAll('.team-mate')
-  if (teamMates.length === 6) {
-    saveContent(`Team${savedTeamNumber}`)
-    savedTeamNumber ++
-  } else console.log('Length must be 6 to save a team')
-}
-
 //API Request Functions//
 const makeRequest = async (url) => {
   let data
@@ -78,7 +49,6 @@ const makeRequest = async (url) => {
       return
     }
     data = await response.json()
-
   } catch (error) {
     console.log('Error: ', error)
   }
@@ -93,7 +63,6 @@ const getPokemon = async () => {
   let genData = await makeRequest(Gurl)
   let typeData = await makeRequest(Turl)
   let printablePokemon = []
-
   for (let i = 0; i < genData.pokemon_species.length; i++) {
     for (let j = 0; j < typeData.pokemon.length; j++)
       if (genData.pokemon_species[i].name.includes(typeData.pokemon[j].pokemon.name))
@@ -147,7 +116,7 @@ const selectActiveMate = (name = '', pokeClass = '') => {
 }
 
 const saveTeam = () => {
-  $('.team-mate').each((mate)=> {
+  $('.team-mate').each((mate) => {
     console.log(mate)
   })
 }
@@ -167,9 +136,8 @@ class TeamMate {
         <div class="mate-name" id='${this.name}-mname' title='${this.id}' >${this.name}</div>`
     )
     $(`#${this.name}`).click(() => selectActiveMate(this.name))
-    $(document).on('click', `#${this.name}-mname`, ()=> {
+    $(document).on('click', `#${this.name}-mname`, async () => {
       localStorage.setItem('pokemonId', this.id)
-      saveContent('savedPokemon')
       window.location.href = 'description.html'
     })
   }
@@ -184,17 +152,14 @@ class Pokemon extends TeamMate {
           <div class="pokemon-name" id="${this.name}-name" title='${this.id}' >${this.name}</div>
       </div>`)
     $(`#${this.name}-pokemon .add-pokemon`).click(() => {
-      const teamMember = new TeamMate(this.name, this.type, this.img)
-      teamMember.replaceMate()
+      this.addToTeam()
     })
-    $(document).on('click', `#${this.name}-pic, #${this.name}-name`, ()=> {
+    $(document).on('click', `#${this.name}-pic, #${this.name}-name`, () => {
       localStorage.setItem('pokemonId', this.id)
-      saveContent()
       window.location.href = 'description.html'
     })
   } addToTeam() {
     this.replaceMate()
-    $(`#${this.name}-pokemon`).remove()
   }
 }
 

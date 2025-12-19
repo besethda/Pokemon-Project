@@ -56,6 +56,7 @@
 }
 
 .active-mate {
+  z-index: 40;
   animation: activeTeam 1.8s infinite;
   transition: .8s all;
 }
@@ -173,11 +174,6 @@
   padding: 2px 1px;
 }
 
-.pokemon-id {
-  font-size: .7rem;
-  color: rgba(0, 0, 0, 0.281);
-}
-
 .add-pokemon {
   cursor: pointer;
   height: 24px;
@@ -195,14 +191,48 @@
   0% {
     box-shadow: 0 3px 5px 1px rgba(0, 0, 105, 0.445);
     transform: scale(1);
-    translate: 0 0px;
   } 50% {
     box-shadow: 0px 3px 8px 5px rgba(0, 0, 105, 0.445);
     transform: scale(1.04);
-    translate: 0 -6px;
   } 100% {
     box-shadow: 0 3px 5px 1px rgba(0, 0, 105, 0.445);
     transform: scale(1);
-    translate: 0 0px;
+  }
+}
+
+@media (orientation: portrait) {
+  .team-container {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .add-mate-container {
+    height: 13vh;
+    margin: 6px;
+  }
+
+  .team-mate {
+    height: 13vh;
+    margin: 6px;
+  }
+
+  .mate-name {
+    font-size: .9rem;
+  }
+
+  .type-box,
+  .gen-box {
+    font-size: .98rem;
+  }
+
+  .pokemon-box {
+    width: clamp(80px, 4.4%, 240px);
+    height: none;
+    margin: 1.7%;
+    aspect-ratio: 3/4;
+  }
+
+  .pokemon-name {
+    font-size: .8rem;
   }
 }
