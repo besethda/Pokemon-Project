@@ -1,0 +1,238 @@
+* {
+  font-family: var(--text-font);
+}
+
+.team-box {
+  display: flex;
+  height: fit-content;
+  justify-content: center;
+  margin: 11px 0;
+  width: 100%;
+}
+
+.team-container {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
+}
+
+.add-mate-container {
+  align-items: center;
+  aspect-ratio: 4/5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 3px;
+  height: 20vh;
+}
+
+.add-mate {
+  cursor: pointer;
+  height: 45px;
+  stroke: rgb(50, 50, 50);
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  transition: all .2s;
+  width: 45px;
+}
+
+.add-mate:hover {
+  transform: scale(1.2);
+}
+
+.add-mate:active {
+  transform: scale(.95);
+}
+
+.team-mate {
+  align-items: center;
+  aspect-ratio: 4/5;
+  border-radius: 14px;
+  box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.626);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  justify-content: space-between;
+  margin: 11px;
+  position: relative;
+}
+
+.active-mate {
+  z-index: 40;
+  animation: activeTeam 1.8s infinite;
+  transition: .8s all;
+}
+
+.mate-pic,
+.pokemon-pic {
+  height: auto;
+  width: 100%;
+}
+
+.mate-name {
+  font-size: 1.2rem;
+  padding: 4px 1px;
+  text-decoration: underline;
+}
+
+.add-pokemon:hover {
+  transform: scale(1.3);
+}
+
+.add-pokemon:active {
+  transform: scale(.96);
+}
+
+.type-container {
+  background: var(--primary-background);
+  border-top: solid rgba(0, 0, 0, 0.263) 2px;
+  box-shadow: 2px 2px 11px 2px rgb(35, 35, 35);
+  display: flex;
+  height: fit-content;
+  justify-content: center;
+  padding: 8px 4px;
+  z-index: 10;
+}
+
+.type-box,
+.gen-box {
+  background-color: rgba(224, 224, 224, 0.856);
+  border-radius: 12px;
+  box-shadow: 0 2px 2px 3px rgba(104, 104, 104, 0.626);
+  color: var(--font-color);
+  cursor: pointer;
+  font-size: var(--text-font-size);
+  height: fit-content;
+  margin: 0px 12px;
+  padding: 3px 7px;
+  position: relative;
+  width: 180px;
+}
+
+.type-menu,
+.gen-menu {
+  background-color: rgba(224, 224, 224, 0.856);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.626);
+  display: none;
+  flex-direction: column;
+  left: 0;
+  max-height: 300px;
+  overflow-y: scroll;
+  padding: 4px 3px;
+  position: absolute;
+  scrollbar-width: none;
+  top: 120%;
+  transition: .5s all;
+  width: fit-content;
+  z-index: 20;
+}
+
+.type-item,
+.gen-item {
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.type-item:hover,
+.gen-item:hover {
+  background-color: rgba(0, 0, 255, 0.222);
+  cursor: pointer;
+}
+
+.pokemon-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.pokemon-box {
+  align-items: center;
+  aspect-ratio: 4/5;
+  background-color: rgb(236, 236, 236);
+  border-radius: 14px;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.626);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: .55%;
+  position: relative;
+  transition: .2s all;
+  width: clamp(110px, 7.2%, 320px);
+}
+
+.pokemon-box:hover {
+  transform: scale(1.05);
+}
+
+.pokemon-name {
+  font-size: 1.1rem;
+  padding: 2px 1px;
+}
+
+.add-pokemon {
+  cursor: pointer;
+  height: 24px;
+  position: absolute;
+  right: 5px;
+  stroke: rgb(50, 50, 50);
+  stroke-linecap: round;
+  stroke-width: 1.5px;
+  transition: all .1s;
+  top: 5px;
+  width: 24px;
+}
+
+@keyframes activeTeam {
+  0% {
+    box-shadow: 0 3px 5px 1px rgba(0, 0, 105, 0.445);
+    transform: scale(1);
+  } 50% {
+    box-shadow: 0px 3px 8px 5px rgba(0, 0, 105, 0.445);
+    transform: scale(1.04);
+  } 100% {
+    box-shadow: 0 3px 5px 1px rgba(0, 0, 105, 0.445);
+    transform: scale(1);
+  }
+}
+
+@media (orientation: portrait) {
+  .team-container {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .add-mate-container {
+    height: 13vh;
+    margin: 6px;
+  }
+
+  .team-mate {
+    height: 13vh;
+    margin: 6px;
+  }
+
+  .mate-name {
+    font-size: .9rem;
+  }
+
+  .type-box,
+  .gen-box {
+    font-size: .98rem;
+  }
+
+  .pokemon-box {
+    width: clamp(80px, 4.4%, 240px);
+    height: none;
+    margin: 1.7%;
+    aspect-ratio: 3/4;
+  }
+
+  .pokemon-name {
+    font-size: .8rem;
+  }
+}

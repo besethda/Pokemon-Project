@@ -1,13 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/Styles/general.css" />
-  <script type="module" src="/Scripts/index.js" defer></script>
-  <script type="module" src="/Scripts/general.js" defer></script>
-  <title>Pokemon!</title>
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./Styles/general.css" />
+    <link rel="stylesheet" href="./Styles/index.css">
+    <script src="./Scripts/index.js" defer></script>
+    <title>Poke Team Builder</title>
+  </head>
+  <body>
+    <header class="header">
+      <a class="logo-container" href="index.html">
+        <img class="logo" src="./Images/PokeLogo.png" />
+      </a>
+      <nav class="nav">
+        <a class="nav-option" href="./team.html">
+          <img class="nav-img" src="./Images/Teams.png" />
+        </a>
+      </nav>
+    </header>
+    <section class="main">
+      <div class="intro-wrapper">
+        <h1 class="h">Welcome to the pokemon team builder!</h1>
+        <p class="p">
+          On this site you will be able to search and read about pokemon and then place them in a teambuilder to make the perfect team to take on any trainer!
+        </p>
+      </div>
+
+      <input type="text" class="pokemon-input" placeholder="Enter Pokemon Name">
+      <button class="search" onclick="fetchData()">Search Pokemon</button><br>
+      <div class="pokemon">
+        <div class="pokemon-header">
+          <div class="blue-circle"></div>
+          <h2 class="pokemon-name"></h2>
+        </div>
+        <div class="pokemon-picture">
+          <img src="" alt="pokemon sprite" class="pokemonSprite" style="display: none">
+          <img src="" alt="pokemon sprite shiny" class="pokemonSpriteShiny" style="display: none">
+        </div>
+        <div class="pokemon-info-wrapper">
+          <div class="pokemon-info">
+            <button class="first-cry">New Cry</button>
+            <button class="second-cry">Legacy Cry</button>
+          </div>
+          <a class="read-more" href="description.html">Read more?</a>
+          <div class="plus-button"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="footer-text">© Oscar Seth Villiam (Team 4)</div>
+    </footer>
+  </body>
 </html>

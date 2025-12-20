@@ -3,12 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/Styles/general.css" />
-  <script type="module" /Scripts/team.js" defer></script>
-  <script type="module" src="/Scripts/general.js"></script>
-  <title>Pokemon Team</title>
+  <link rel="stylesheet" href="/Styles/team.css" />
+  <script src="/Scripts/jquery-3.7.1.min.js"></script>
+  <script type="module" src="/Scripts/team.js" defer></script>
+  <title>Pokemon Teams</title>
 </head>
 <body>
-  
+  <header class="header">
+    <a class="logo-container" href="index.html">
+      <img class="logo" src="./Images/PokeLogo.png" />
+    </a>
+    <nav class="nav">
+      <a class="nav-option" href="./index.html">
+        <img class="nav-img" src="./Images/Home.png" />
+      </a>
+    </nav>
+  </header>
+  <section class="main">
+    <div class="team-box">
+      <div class="team-container">
+        <div class="add-mate-container">
+            <svg class="add-mate" viewBox="0 0 24 24"><path d="M5 12h7m7 0h-7m0 0V5m0 7v7"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="type-container">
+      <div class="type-box">
+        <div class="type-text">Choose a Type:</div>
+        <div class="type-menu"></div>
+      </div>
+      <div class="gen-box">
+        <div class="gen-text">Choose a Gen:</div>
+        <div class="gen-menu"></div>
+      </div>
+    </div>
+    <div class="pokemon-list">
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="footer-text">© Oscar Seth Villiam (Team 4)</div>
+  </footer>
 </body>
 </html>
