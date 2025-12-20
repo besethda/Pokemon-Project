@@ -2,7 +2,7 @@ let pokemonId = Number(localStorage.getItem("pokemonId"));
 const MAX_POKEMON = 1025;
 
 const savePokemonId = (id) => {
-  localStorage.setItem("PokemonId", id);
+  localStorage.setItem("pokemonId", id);
 };
 
 async function loadSpecies() {
